@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>87a44d82b27c56a787b7fd6e</title>
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            margin-bottom: 3rem;
+            /* border-bottom: 1px solid #eaeaea; */
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); */
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin-left: 15px;
+            margin-right: 15px;
+            object-fit: contain;
+        }
+
+        .ministry-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .verification-title {
+            padding-top: 1.4rem;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: #000000;
+        }
+
+        .code-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 4px;
+            border-radius: 4px;
+            font-size: 30px;
+            font-weight: 540;
+            text-align: center;
+            box-sizing: border-box;
+            color: #000000;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2979ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: #1d4ed7;
+        }
+
+        /* .separator {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            width: 100%;
+        } */
+
+        input::placeholder {
+            font-weight: 500;
+            opacity: 0.7;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        input:focus {
+            outline: none;
+            /* border-color: #2979ff; */
+        }
+
+        /* I want to increase input text font size but not increasing input field*/
+        
+        
+
+        input {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .wrong-code {
+            visibility: hidden;
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://medical-sertificate.ssv.uz/logo.png" alt="Ministry of Health Logo" class="logo" id="ministry-logo">
+            <div class="ministry-title">Министерство здравоохранения<br>Республики Узбекистан</div>
+        </div>
+        
+        <h2 class="verification-title">Код подтверждения</h2>
+        <input type="number" class="code-input" placeholder="Введите код">
+        <div class="wrong-code" id="wrong-code">Неверный код</div>
+        <button class="submit-button">Подтвердить</button>
+        
+        <div class="separator"></div>
+    </div>
+
+    <script>
+        // Extract the emblem from the screenshot
+        document.addEventListener('DOMContentLoaded', function() {
+            // Replace with actual emblem URL when available
+            const emblemUrl = 'https://medical-sertificate.ssv.uz/logo.png';
+            
+            // Try to load the actual emblem
+            const img = new Image();
+            img.onload = function() {
+                document.getElementById('ministry-logo').src = emblemUrl;
+            };
+            img.onerror = function() {
+                // Keep the current image if loading fails
+                console.log('Failed to load the emblem, using placeholder');
+            };
+            img.src = emblemUrl;
+            
+            // Add form submission handling
+            document.querySelector('.submit-button').addEventListener('click', function() {
+                const code = document.querySelector('.code-input').value.trim();
+                if (code === '1603') {
+                    document.getElementById('wrong-code').style.visibility = 'hidden';
+                    // alert('Code submitted: ' + code);
+                    // add logic to redirect to sicklevel.html
+                    // clear input field
+                    document.querySelector('.code-input').value = '';
+                    window.location.href = 'medical-certificate.html';
+                } else {
+                    document.getElementById('wrong-code').style.visibility = 'visible';
+                }
+            });
+            
+            // Add enter key support
+            document.querySelector('.code-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.querySelector('.submit-button').click();
+                    
+                }
+            });
+
+            // set visibility hidden for wrong code when input updates
+            document.querySelector('.code-input').addEventListener('input', function() {
+                document.getElementById('wrong-code').style.visibility = 'hidden';
+            });
+        });
+    </script>
+</body>
+</html>
